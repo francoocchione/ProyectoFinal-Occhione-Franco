@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<h1><img src="/static/assets/ratona.png" width = "100" height="100"> Registracion</h1>
+<br></br>
+<form method="post">
+ {% csrf_token %}
+ {{ form.as_p }}
+ <input type="submit" value="Registrarse" />
+</form>
+{% endblock contenido %}

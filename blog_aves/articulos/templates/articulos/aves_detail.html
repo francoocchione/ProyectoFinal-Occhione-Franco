@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<p>
+ <strong>Nombre:</strong> {{object.nombre}}
+</p>
+<p>
+ <strong>Orden:</strong> {{object.orden}}
+</p>
+<p>
+ <strong>Familia:</strong> {{object.familia}}
+</p>
+<p>
+ <strong>Especie:</strong> {{object.especie}}
+</p>
+<p>
+ <strong>Caracteristicas fisicas:</strong> {{object.caracteristicas}}
+</p>
+<p>
+ <strong>Ultimo avistamiento:</strong> {{object.ultima_observacion}}
+</p>
+
+<p>
+ <img src="{{object.foto.url}}" alt="{{object.nombre}}" width="200" height="200">
+</p>
+{% if object.audio %}
+    <p>
+        <strong>Canto:</strong>
+        <audio style="width:200px" src="{{object.audio.url}}" controls="controls"></audio>
+    </p>
+{% endif %}
+
+<br>
+<a href="{% url 'lista_aves' %}">Volver a la lista</a>
+
+{% endblock contenido %}

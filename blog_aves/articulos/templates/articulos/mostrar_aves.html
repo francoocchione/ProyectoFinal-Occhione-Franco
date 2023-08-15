@@ -1,0 +1,52 @@
+{% extends "base.html" %} 
+{% block titulo %} 
+Las Aves
+{% endblock titulo %}
+
+{% block contenido %} 
+
+<div class="entry-container">
+    <header class="header" >
+        <img src="/static/assets/pirinchos.png" alt="Pirinchos" width = "500" height="300">
+    </header>
+</div>
+
+<br></br>
+
+<h1>Las Aves</h1>
+<div class= "entry-content">
+    <p>El objetivo de esta página es que el visitante tenga juntas todas las aves que fueron fotografiadas en la reserva. De un simple vistazo se hace una idea de lo que se ha visto y para quienes tienen un ave y no saben qué es es una forma sencilla de ubicarla. "Información" contiene datos sobre el ave en cuestión.</p>
+</div>
+
+
+<form action = "{% url 'buscar_aves' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="busqueda">
+    <input type="submit" value="Buscar por nombre">
+  </form>
+  <a href="{% url 'lista_aves' %}">Ver lista completa</a>
+  <br></br>
+<table class= "table">
+    <tbody>
+        <tr>
+            <th>Nombre</th>
+            <th>Especie</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for ave in aves %}
+        <tr>
+            <td>{{ ave.nombre }}</td>
+            <td>{{ ave.especie }}</td>
+            <td>
+                <img src="{{ave.foto.url}}" alt="{{ave.nombre}}" width="100" height="100">
+            </td>
+            <td>
+                <a class= "btn btn-info" href="{% url 'ver_ave' ave.id %}">Informacion</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock contenido %}

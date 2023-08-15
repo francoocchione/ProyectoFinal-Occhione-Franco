@@ -1,0 +1,76 @@
+{% extends "base.html" %} 
+{% block titulo %} 
+Publicaciones
+{% endblock titulo %}
+
+{% block contenido %} 
+
+<h1>Publicaciones de usuarios</h1>
+<br></br>
+<br></br>
+
+{% if user.is_authenticated %}
+    <div class="entry-container">
+        <header class="header" >
+            <a class= "btn btn-primary" href="{% url 'crear_articulo' %}">Escribir publicacion</a>
+        </header>
+    </div>
+{% else %}
+    <div class="entry-container">
+        <header class="header" >
+            <a href="{% url 'login' %}">Inicia sesion para subir una publicacion</a>
+        </header>
+    </div>
+{% endif %}
+
+<br>
+</br>
+
+<form action = "{% url 'buscar_articulos' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="busqueda">
+    <input type="submit" value="Buscar por titulo">
+  </form>
+  <a href="{% url 'lista_articulos' %}">Ver todas las publicaciones</a>
+  <br></br>
+
+<table class= "table">
+    <tbody>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Creado por</th>
+            <th>Fecha</th>
+            <th></th>
+        </tr>
+        {%if articulos %}
+            {% for articulo in articulos %}
+            <tr>
+                <td>
+                    {% if articulo.foto %}
+                        <img src="{{articulo.foto.url}}" alt="{{articulo.titulo}}" width="300" height="300">
+                    {% endif %}
+                </td>
+                <td>
+                    <h3>{{ articulo.titulo }}</h3>
+                </td>
+                <td>
+                    <p>{{ articulo.autor }}</p>
+                </td>
+                <td>
+                    <p>{{ articulo.fecha }}</p>
+                </td>
+                <td>
+                    <a class= "btn btn-info" href="{% url 'ver_articulos' articulo.id %}">Ver mas</a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6">No hay publicaciones en esta pagina</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+{% endblock contenido %}

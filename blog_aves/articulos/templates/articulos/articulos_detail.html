@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<a href="{% url 'lista_articulos' %}">Volver a publicaciones</a>
+<br></br>
+<br></br>
+{% if user.is_authenticated %}
+    {% if user.username == object.autor.username %}
+        <a class="btn btn-outline-secondary" href="{% url 'editar_articulo' object.id %}">Editar publicacion</a>
+        <a class="btn btn-outline-danger" href="{% url 'eliminar_articulo' object.id %}">Eliminar publicacion</a>
+    {% endif %}
+{% endif %}
+
+<br></br>
+<br></br>
+<h1>
+ <strong>{{object.titulo}}</strong>
+</h1>
+<br></br>
+<h4>
+    {{object.subtitulo}}
+</h4>
+<br></br>
+<p>
+    {% if object.foto %}
+        <img src="{{object.foto.url}}" alt="{{object.titulo}}" width="900" height="900">
+    {% endif %}
+</p>
+<p>{{object.fecha}}  Por {{object.autor.get_full_name}} @{{object.autor}}</p>
+<p>
+ {{object.contenido}}
+</p>
+
+
+{% endblock contenido %}

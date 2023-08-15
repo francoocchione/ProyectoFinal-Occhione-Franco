@@ -1,0 +1,19 @@
+{% extends "base.html" %} 
+
+{% load static %}
+<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+{% block contenido %}
+<h3>Escribir una publicacion</h3>
+<br></br>
+<form method = 'post' enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ formulario.as_p }} 
+    {{ formulario.errors }}
+    <input type="submit" class = "btn btn-outline-success" value="Publicar" />
+</form>
+<br></br>
+<a href="{% url 'lista_articulos' %}">Volver a lista de publicaciones</a>
+
+{% endblock contenido %}
