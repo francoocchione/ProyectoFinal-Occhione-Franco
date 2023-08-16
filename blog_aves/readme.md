@@ -31,5 +31,8 @@ contraseña:superuser2019
 username: franocchione96
 contraseña: River91218
 
+username: julisolis99
+contraseña: pincha70
+
 ## Para hacer prueba Unit Test automatizado:
 En terminal: cd blog_aves python manage.py test (visualizar archivo tests.py dentro de app 'articulos')
