@@ -51,8 +51,9 @@ def editar_articulo(request, id):
             articulo.titulo = data['titulo']
             articulo.subtitulo = data['subtitulo']
             articulo.contenido = data['contenido']
-            articulo.fecha = data['fecha']
-            articulo.foto = data['foto']
+            #articulo.fecha = data['fecha']
+            if data['foto']:
+                articulo.foto = data['foto']
             articulo.save()
             url_exitosa = reverse('lista_articulos')
             return redirect(url_exitosa)
@@ -61,7 +62,7 @@ def editar_articulo(request, id):
             'titulo' : articulo.titulo,
             'subtitulo' : articulo.subtitulo,
             'contenido' : articulo.contenido,
-            'fecha' : articulo.fecha, 
+            #'fecha' : articulo.fecha, 
             'foto' : articulo.foto,
         }
         formulario = ArticuloFormulario(initial=inicial)
